@@ -1,0 +1,16 @@
+Title: Random Size String and Pseudoword Generator for Metro M4 Board
+
+Description:
+This program is designed to run on the Adafruit Metro M4 board, powered by the ATSAMD51 chipset. It provides functionality for generating random alphanumeric strings and pseudowords, the sizes of which can be varied randomly.
+
+Key features include:
+1. Generating random numbers within a range of 1-999999.
+2. Creating random alphanumeric strings consisting of uppercase and lowercase letters, numbers, and special characters.
+3. Producing pseudowords that resemble English words in terms of pronunciation but don't necessarily hold any meaning.
+4. Allowing users to specify the size of the random numbers and the length of the alphanumeric strings and pseudowords if they prefer not to use the random default sizes.
+
+The outputs for each of the generated items are clearly labeled and can be viewed via the serial monitor and plotter for user convenience. This sketch is ideal for testing and debugging scenarios where a wide variety of string inputs are required. 
+
+Please note, this sketch leverages the true random number generation capabilities of the ATSAMD51 microcontroller for generating the randomness in the strings and pseudowords. 
+
+The filename `RandSizeStrPseudoGen_M4.ino` is an abbreviation of Random Size String and Pseudoword Generator for the Metro M4 board.
