@@ -1,0 +1,47 @@
+Thank you. Running that code tells us that the FFT calculation is where the program appears to be slowing down. What could we do to speed up the FFT calculations? Is it possible the FFT calculation is dealing with values which are saturating the hardware's compute capacity? 
+
+The Fast Fourier Transform (FFT) is a computationally intensive operation and it can take some time to calculate, especially on a microcontroller like the ATSAMD51. However, there are a few ways you could potentially speed up the calculations or mitigate the effect of the slowdown:
+
+Decrease Buffer Size: Decreasing the buffer size reduces the number of points the FFT has to calculate, which can reduce computation time. However, this will also decrease the resolution of the FFT.
+
+Optimize Code: It's possible there may be some efficiencies to be gained by optimizing the arduinoFFT library code itself. However, this would likely require a deep understanding of both the FFT algorithm and the microcontroller's architecture.
+
+Increase Clock Speed: If you're not already running the microcontroller at its maximum clock speed, increasing the clock speed can make the calculations go faster.
+
+Use an external FFT chip: There are chips available that can handle FFT calculations independently of the main microcontroller. This offloads the heavy computation to another chip, which can communicate the results when ready.
+
+Use a more powerful microcontroller: If you're finding that the ATSAMD51 just isn't powerful enough for your needs, you might need to consider upgrading to a more powerful microcontroller.
+
+As for the FFT dealing with values that are saturating the hardware's compute capacity, this is unlikely. The FFT operates on complex numbers, and the resulting magnitudes (which is what we're calculating in this case) are all real numbers. If these numbers are within the range that the microcontroller's processor can handle, then saturation isn't the issue. It's more likely that the computation time is simply due to the complexity of the FFT algorithm itself.
+
+Also, ensure that there is enough memory for the buffer. If the buffer is too large, you could run out of memory, which would cause the program to fail.
+
+If the goal is to reduce the load on the FFT calculation, one possible approach would be to reduce the size of the data being processed. This would inevitably lead to a lower resolution in the frequency domain, but it would also decrease the computational time.
+
+Remember that an FFT algorithm converts time-domain data to frequency-domain data. The size of the data (buffer size) directly affects the frequency resolution of the FFT result. Hence, reducing the buffer size would lead to less resolution.
+
+Here's how you could change the buffer size in your code:
+
+This code reduces the buffer size from 100 to 64, which is a power of 2. FFT algorithms work best with sizes that are powers of 2. The smaller size will mean less time and computational power needed for the FFT calculation.
+
+However, if this doesn't help and the computations are still slow, you may need to consider a different approach, such as using a different FFT library or switching to a more powerful microcontroller.
+
+Also note that with a smaller buffer, your data collection will fill up the buffer faster, leading to more frequent FFT calculations. You'll need to monitor the output to ensure the system is still performing as expected.
+
+The Arduino serial plotter can be a very powerful tool for visualizing data. Here are a few ways you might be able to improve your visualization:
+
+Multiple Series: If you're only plotting one series of data right now (the FFT magnitude), consider adding additional series. For example, you might plot the raw input data alongside the FFT output. To do this, you can send multiple values on the same line in your Serial.println() call, separated by a space or a comma.
+
+Time Information: You could plot the data against time. By printing the elapsed time (using millis()) along with each data point, you could visualize how your data is changing over time.
+
+Buffer Utilization: If buffer utilization is important to your application, consider sending this information to be plotted. This might help you visualize when the buffer is getting full and FFT calculations are being performed.
+
+Normalized FFT Data: Consider normalizing the FFT magnitude data. This could help to visualize relative changes in the FFT output, which might be useful if you're interested in the spectral content of your data.
+
+Use Labels: While the Arduino IDE's Serial Plotter does not directly support labels, you can "label" data by sending a comment line right before the data. For instance, Serial.println("#FFT Magnitude").
+
+Remember to carefully organize your Serial output data, and try to be consistent with the sequence of data being plotted, as the Serial Plotter doesn't handle changes in the number of data series very well.
+
+Lastly, for more complex visualization needs, you might want to consider logging the data and using a more powerful tool like Python with Matplotlib, or a dedicated data visualization tool, to analyze it.
+
+Let's add the time information to your current Serial print statements as an example:
