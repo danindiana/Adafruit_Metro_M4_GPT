@@ -1,5 +1,5 @@
 /*
-   See if we can get the SAMD51 True Random Number Gneerator (TRNG) working
+   How to enable SAMD51 True Random Number Gneerator (TRNG)
 */
 void setup() {
   Serial.begin(1);
