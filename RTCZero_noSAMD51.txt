@@ -1,0 +1,23 @@
+RTCZero library does not support the SAMD51 chipset. 
+
+Re: https://github.com/SodaqMoja/Sodaq_wdt/issues/3
+
+Can we create a library that will?
+
+Creating a new library for a microcontroller like SAMD51 is a substantial task and is generally beyond the scope of this platform, especially when considering the testing and development of a robust, reusable, and reliable library for RTC functionality. But I can certainly help guide you in the right direction on how you can achieve this.
+
+1. **Review existing RTC libraries**: There are many libraries available for RTC for various microcontrollers. You need to understand the basic structure of these libraries. You might want to look at some of these libraries for reference: DS3231, DS1307, PCF8523, and so on. You can find them on GitHub or in the Arduino Library Manager.
+
+2. **Understand the SAMD51 RTC peripheral**: You need to refer to the datasheet and technical reference manual for SAMD51. It will have a section dedicated to the RTC. Read it carefully and understand how to configure and use the RTC. 
+
+3. **Creating the Library**: Start by creating the header (.h) file and source (.cpp) file for your library. Define a class for your library in the header file. The public functions of this class should provide interfaces for setting the time, getting the time, and other features you want to support. 
+
+4. **Implementing the Library**: Write the implementation of these functions in your .cpp file. This would involve writing the registers of SAMD51 RTC according to the peripheral's datasheet. 
+
+5. **Testing**: Once you have a basic version of your library, write some test code to make sure everything is working as expected. 
+
+6. **Iteration**: You will likely need to go through several iterations of steps 4 and 5. You may need to add additional functionality, fix bugs, or improve your library in other ways based on your testing. 
+
+7. **Documentation**: Once you are satisfied with your library, don't forget to write good documentation. This should include both comments in your code and a README file that explains how to use your library.
+
+Please note, RTC setup requires low-level manipulation of the microcontroller's registers, which requires a thorough understanding of the microcontroller's datasheet. As with all such projects, make sure you have a robust system for testing and validation.
