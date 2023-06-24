@@ -496,3 +496,49 @@ Certainly. I apologize for any confusion earlier. It's important to note that di
     - Test the configurability of the peripheral multiplexer for various pins and validate that the correct peripheral signals are routed to the pins.
 
 These tests are meant to provide a comprehensive verification of the SAMD51 features and peripherals. Always refer to the datasheet and hardware reference manual to understand the specific details and requirements for each test. Also, be sure to consider safety and precautionary measures when interfacing with external hardware and signals.
+
+Expand upon the SAMD51 True Random Number Generator (TRNG) Avalanche Test.
+
+The term "Avalanche Test" can refer to a type of test conducted on Random Number Generators, especially hardware-based True Random Number Generators (TRNGs) like the one present in SAMD51. TRNGs typically rely on some physical process with inherent randomness, such as electronic noise, to generate random numbers. The "avalanche" in this context refers to a phenomenon where a small change in input or initial conditions can cause a drastic change in the output, which is a desirable characteristic for a random number generator.
+
+In the context of TRNG, the Avalanche Test aims to measure how sensitive the output of the TRNG is to changes in its input or initial conditions. The ideal behavior for a TRNG is that a single bit change in the input or initial condition should have the potential to affect every bit of the output, making the output unpredictable and thus truly random.
+
+Here's how you might perform an Avalanche Test for the SAMD51's TRNG:
+
+1. **Initial Data Collection**: Collect a large sample of random numbers from the TRNG.
+
+2. **Perturbation**: Introduce a small change in the TRNG’s environment or internal state. This could be something like a slight change in operating voltage, temperature, or clock frequency. Note that this step must be performed carefully to avoid violating the operating conditions of the TRNG.
+
+3. **Secondary Data Collection**: Collect another large sample of random numbers from the TRNG after the perturbation.
+
+4. **Comparison**: Compare the random numbers from the initial data collection to those from the secondary data collection. The difference between the sets of numbers should be significant, even though only a small change was made to the input or initial conditions. You can use metrics like Hamming distance to quantify the difference.
+
+5. **Analysis**: If the output data significantly differs with only a slight change in input, the TRNG passed the Avalanche Test. If not, it might not be producing high-quality random numbers.
+
+Please note that this is a high-level overview and implementing such tests can be more complex. Additionally, modifying the operating conditions of the microcontroller should be done cautiously and within the specifications provided in the datasheet.
+
+Expand upon the SAMD51 Event System (EVSYS) Complex Waveform Generation test.
+
+The Event System (EVSYS) in SAMD51 is a powerful feature that allows peripherals to interact with each other without CPU intervention. This feature can be used for complex waveform generation by chaining different peripherals together to create a desired output signal. Testing the EVSYS for complex waveform generation is important to ensure that the system functions properly under different conditions and configurations.
+
+Here is how a Complex Waveform Generation test might be structured for the SAMD51's EVSYS:
+
+1. **Setup**: Configure the EVSYS to chain multiple peripherals together. For example, you can use a timer to generate periodic events which are then used to trigger a DAC (Digital to Analog Converter) to output a certain voltage level. You can further use this signal as an input to a comparator to generate another set of events.
+
+2. **Waveform Design**: Define the desired complex waveform that you want to generate. This could be a complex signal with varying frequency, amplitude, or shape (like sine waves, triangular waves, or a combination).
+
+3. **Configuration**: Configure the peripherals involved in the test according to the designed waveform. This includes setting up timers, compare registers, DACs, ADCs, or other peripherals that might be involved. 
+
+4. **Generation**: Start the event generation and let the EVSYS produce the complex waveform for a significant period.
+
+5. **Capture and Validation**: Use an oscilloscope or a logic analyzer to capture the output waveform. Analyze the captured waveform to check if it matches the designed waveform in terms of frequency, amplitude, and shape. Calculate the error margins and ensure that they are within acceptable limits.
+
+6. **Stress Testing**: Change the environmental conditions such as temperature or supply voltage to see if the system continues to generate the desired waveform under different conditions. Monitor the error margins to ensure that they are still within acceptable limits.
+
+7. **Edge Cases**: Test edge cases where the frequency, amplitude, or other parameters are at their maximum or minimum allowed values. Ensure that the system does not exhibit erratic behavior or go out of specification.
+
+8. **Report Generation**: Compile a detailed report with the results of the tests, including any discrepancies or issues found during testing. Include graphs of the waveforms captured and error margins calculated.
+
+9. **Issue Resolution**: If any issues are found, work on resolving them, and perform the test again to validate that the issues have been fixed.
+
+Please note that this is a high-level overview, and in practice, testing can be more intricate. Also, when you're manipulating the operating conditions, always ensure that you're within the ranges specified in the SAMD51 datasheet. This test could be part of a broader suite of tests to ensure the correct functioning of the SAMD51 microcontroller.
